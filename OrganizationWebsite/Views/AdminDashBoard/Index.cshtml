@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+    <html>
+    <head>
+        <title>
+        @{
+            ViewData["Title"] = "Admin dash board";
+        }
+        </title>
+        <style>
+            header,footer{
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+     <div class="container mt-5">
+         <div class="text-center navbar-brand">
+            <h1>
+                Admin Dash Board <i class="fas fa-user-shield"></i>
+            </h1>
+        </div>
+
+         <div class="text-center mt-5">
+            <h5>
+                "Efficiently oversee your organization's operations with our streamlined admin dashboard, designed to manage members, events, and resources effortlessly."
+            </h5>
+        </div>
+        <div class="mt-5 container d-flex justify-content-center align-items-center gap-4">
+            <div>
+                <a asp-action="StudentDetails" asp-controller="AdminDashBoard" class="btn btn-primary btn-lg">
+                    Student Details <i class="fas fa-user-graduate"></i>
+                </a>
+            </div>
+
+            <div>
+                <a asp-action="AddNotification" asp-controller="AdminDashBoard" class="btn btn-success btn-lg">Add Notification <i class="fas fa-user-plus"></i></a>
+            </div>
+
+            <div>
+                <a  asp-action="Logout" asp-controller="Account" class="btn btn-danger btn-lg">Logout <i class="fas fa-power-off"></i></a>
+            </div>
+
+        </div>
+     </div>
+    </body>
+    </html>

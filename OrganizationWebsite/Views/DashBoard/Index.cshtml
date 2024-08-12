@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<AppUser> SignInManager
+@model OrganizationWebsite.Models.AppUser
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @{
+        ViewData["Title"]="Dash Board";
+        }
+        </title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            color: black;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                color: black;
+                padding: 15px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: #A0AECD;
+                    color:white;
+                }
+                header,footer{
+                    display:none;
+                }
+
+            .btn{
+            background-color: #A0AECD;
+            color: white;
+            height:40px;
+        }
+        #avatar{
+            height:200px;
+            width:200px;
+            border-radius:100px;
+            border:3px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    @if (TempData["message"] != null)
+    {
+@*         <script type="text/javascript">
+            alert('@TempData["message"]');
+        </script>
+ *@
+
+        <div class="alert alert-info alert-dismissible fade show mt-4" role="alert">
+            @TempData["message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    }
+    <div class="container mt-5">
+        <h4 class="text-center">
+            Student Dash-Board <i class="bi bi-mortarboard"></i>
+        </h4>
+    </div>
+
+    <div class="container d-flex">
+        <!-- Toggle button for smaller screens -->
+        <button class="btn  d-md-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+
+        <div style="border-radius:10px; display: flex; flex-direction: column; height: 75vh;" class="sidebar card-header mt-5 d-none d-md-flex" id="sidebar">
+            <h3 class="text-center"><i class="bi bi-list"></i> Menu</h3>
+            <a class="mt-5" asp-action="Index" asp-controller="DashBoard"><i class="bi bi-house-door"></i> Home</a>
+            <a asp-action="Profile" asp-controller="DashBoard"> <i class="bi bi-person"></i> Profile</a>
+            <a asp-action="Notifications" asp-controller="DashBoard"><i class="bi bi-bell"></i> Notifications</a>
+            <a asp-action="MyCourses" asp-controller="DashBoard"><i class="bi bi-book"></i> My Courses</a>
+            <a asp-action="ChangePassword" asp-controller="DashBoard"><i class="bi bi-gear"></i> Change Password</a>
+            <a asp-action="Logout" asp-controller="Account" class="mt-auto mb-1 "><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+
+        <div style="border-radius:10px;" class="container card-header text-center mt-5 ms-5">
+            <h3 class="mt-5">Hello ! @User.Identity!.Name</h3>
+            <div class="container mt-5">
+                <img id="avatar" class="img-fluid" src="@Model.Avatar" alt="Alternate Text" />
+            </div>
+            <h4 class="mt-5">
+                Welcome to Your Student Dashboard!
+            </h4>
+            <h5 class="mt-2">
+                Here, you can easily manage your courses, track your grades, and stay updated with campus news. Access all your academic information in one place and stay organized with personalized tools and resources designed to help you succeed.
+
+            </h5>
+        </div>
+    </div>
+    <script src="~/js/toggle.js"></script>
+</body>
+</html>

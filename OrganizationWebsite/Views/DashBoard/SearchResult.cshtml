@@ -1,0 +1,68 @@
+﻿@model List<OrganizationWebsite.Models.Course>
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>
+        @{
+            ViewData["Title"] = "Search Results";
+        }
+        </title>
+        <style>
+        header, footer {
+            display: none;
+        }
+
+    </style>
+
+    </head>
+    <body>
+    <div class="container mt-5 text-center">
+        <p>Your search results are here</p>
+        <p>@ViewBag.Msg</p>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="d-flex justify-content-center">
+                <table class="table mt-5 w-50 table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Course Name</th>
+                            <th>Duration</th>
+                            <th>Fee</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Course_Name</td>
+                                <td>@item.Duration</td>
+                                <td>@item.Fee</td>
+                                <td>
+                                    <form method="post" action="/DashBoard/Join">
+                                        <input type="hidden" name="courseId" value="@item.Id" />
+                                        <input type="hidden" name="courseName" value="@item.Course_Name" />
+                                        <button type="submit" class="btn btn-success"><i class="fas fa-user-plus"></i> Sign Up</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+            <a class="nav nav-link text-black" href="MyCourses"><i class="bi bi-arrow-left"></i> Back to My Courses</a>
+
+        }
+        else
+        {
+            <p class="text-secondary">No results found</p>
+            <a class="nav nav-link text-black" href="MyCourses"><i class="bi bi-arrow-left"></i> Back to My Courses</a>
+        }
+    </div>
+
+</body>
+    </html>

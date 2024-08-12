@@ -1,0 +1,64 @@
+﻿@model List<OrganizationWebsite.Models.AppUser>
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>
+        @{
+            ViewData["Title"] = "Student's Details";
+        }
+        </title>
+    <style>
+        header, footer {
+            display: none;
+        }
+    </style>
+</head>
+    <body>
+        <div class="container mt-5 text-center"></div>
+        <h4 class="mt-5">Student's Details</h4>
+    <a class="nav nav-link text-black mt-4" asp-action="Index" asp-controller="AdminDashBoard"><i class="bi bi-arrow-left"></i> Back to home</a>
+            <table class="table table-striped mt-3 table-responsive-md">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>DOB</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Avatar</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        <tbody>
+            @foreach (var list in Model.Where(user=>user.Email!="admin@gmail.com"))
+            {
+                <tr>
+                    <td>@list.FirstName @list.LastName</td>
+                    <td>@list.Gender</td>
+                    <td>@list.DateOfBirth.ToString("yyyy")</td>
+                    <td>@list.Email</td>
+                    <td>@list.PhoneNumber</td>
+                    <td>@list.Country</td>
+                    <td>@list.State</td>
+                    <td>@list.City</td>
+                    <td>@list.Picked_Courses</td>
+                    <td>@list.Status</td>
+                    <td>
+                        <img style="max-width:75px;" src="@list.Avatar" alt="Image" />
+                    </td>
+                    <td>
+                        <a href="AdminEdit/@list.Id" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+            </table>
+    </body>
+    </html>

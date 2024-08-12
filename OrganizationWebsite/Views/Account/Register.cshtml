@@ -1,0 +1,207 @@
+﻿@model OrganizationWebsite.ViewModels.RegisterVm
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Registration</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 200vh;
+        }
+
+        #container {
+            flex: 1;
+        }
+
+        .validation-summary-errors ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center mt-5">
+        <h5 id="title">Registration</h5>
+    </div>
+
+    <div>
+        <p>Welcome to the Student Registration Page! Please fill out the form below with your personal details, contact information, and preferences. Your registration helps us gather essential information to better serve your needs. Ensure all fields are completed accurately before submitting. We appreciate your time and effort in providing this information.</p>
+    </div>
+
+    <div id="container" class="card-header col-md-8 align-items-center container mt-3" style="border-radius:20px; margin-bottom: 2rem;">
+        <div class="card-body mt-5 input-container">
+            <form asp-action="Register" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="label-control">First Name</label>
+                            <i class="fas fa-user icon"></i>
+                            <input type="text" asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="LastName" class="label-control">Last Name</label>
+                            <i class="fas fa-user icon"></i>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Gender" class="label-control">Gender:</label>
+                            <label class="radio-label">
+                                <input type="radio" asp-for="Gender" value="Male" class="radio-input" />
+                                Male <i class="fas fa-mars icon"></i>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" asp-for="Gender" value="Female" class="radio-input" />
+                                Female <i class="fas fa-venus icon"></i>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" asp-for="Gender" value="Others" class="radio-input" />
+                                Others <i class="fas fa-genderless icon"></i>
+                            </label>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth" class="label-control">Date Of Birth</label>
+                            <i class="fas fa-calendar icon"></i>
+                            <input asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Email" class="label-control">Email</label>
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="email" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Phone_number" class="label-control">Phone Number</label>
+                            <i class="fas fa-phone icon"></i>
+                            <input type="tel" asp-for="Phone_number" class="form-control" />
+                            <span asp-validation-for="Phone_number" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Country" class="label-control">Country</label>
+                            <i class="fas fa-globe icon"></i>
+                            <select id="country" asp-for="Country" name="country" class="form-select" onchange="UpdateState()" required>
+                                <option value="" disabled selected>Select Country</option>
+                                <option value="India">India</option>
+                                <option value="USA">USA</option>
+                            </select>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="State" class="label-control">State</label>
+                            <i class="fas fa-map-marker-alt icon"></i>
+                            <select id="state" asp-for="State" name="state" class="form-select" onchange="UpdateCity()" required>
+                                <option value="" disabled selected>Select State</option>
+                            </select>
+                            <span asp-validation-for="State" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="City" class="label-control">City</label>
+                            <i class="fas fa-city icon"></i>
+                            <select id="city" asp-for="City" name="city" class="form-select" required>
+                                <option value="" disabled selected>Select City</option>
+                            </select>
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <label for="hobbies">Hobbies:</label>
+                            <i class="fas fa-star icon"></i>
+                        </div>
+                        @{
+                            string[] hobbies = { "Playing games", "Reading books", "Listening to music", "Dancing", "Singing" };
+                        }
+                        @foreach (var hobby in hobbies)
+                        {
+                            <label>
+                                <input type="checkbox" name="Hobbies" value="@hobby" />@hobby
+                            </label>
+                            <br />
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Avatar" class="form-label">Upload Avatar</label>
+                            <i class="fas fa-user-circle icon"></i>
+                            <input type="file" asp-for="Avatar" class="form-control" />
+                            <span class="text-success">@ViewBag.UploadStatus</span>
+                            <span asp-validation-for="Avatar" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Password" class="label-control">Password</label>
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="label-control">Confirm Password</label>
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div><br />
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-paper-plane"></i> Submit</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <a class="nav-link text-black" asp-action="Login">Already have an account? Click here</a>
+        </div>
+    </div>
+
+    <script src="~/js/dynamic.js"></script>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>

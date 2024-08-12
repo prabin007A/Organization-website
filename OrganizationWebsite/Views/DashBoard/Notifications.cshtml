@@ -1,0 +1,109 @@
+﻿@model List<OrganizationWebsite.Models.Notification>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @{
+            ViewData["Title"] = "Notifications";
+        }
+    </title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            color: black;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                color: black;
+                padding: 15px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: #A0AECD;
+                    color: white;
+                }
+
+        header, footer {
+            display: none;
+        }
+
+        .btn {
+            background-color: #A0AECD;
+            color: white;
+            height: 40px;
+        }
+
+        #avatar {
+            height: 200px;
+            width: 200px;
+            border-radius: 100px;
+            border: 3px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h4 class="text-center">
+            Notifications <i class="bi bi-bell"></i>
+        </h4>
+    </div>
+
+    <div class="container d-flex">
+        <!-- Toggle button for smaller screens -->
+        <button class="btn  d-md-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+
+        <div style="border-radius:10px; display: flex; flex-direction: column; height: 75vh;" class="sidebar card-header mt-5 d-none d-md-flex" id="sidebar">
+            <h3 class="text-center"><i class="bi bi-list"></i> Menu</h3>
+            <a class="mt-5" asp-action="Index" asp-controller="DashBoard"><i class="bi bi-house-door"></i> Home</a>
+            <a asp-action="Profile" asp-controller="DashBoard"> <i class="bi bi-person"></i> Profile</a>
+            <a asp-action="Notifications" asp-controller="DashBoard"><i class="bi bi-bell"></i> Notifications</a>
+            <a asp-action="MyCourses" asp-controller="DashBoard"><i class="bi bi-book"></i> My Courses</a>
+            <a asp-action="ChangePassword" asp-controller="DashBoard"><i class="bi bi-gear"></i> Change Password</a>
+            <a asp-action="Logout" asp-controller="Account" class="mt-auto mb-1 "><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+
+        <div style="border-radius:10px;" class="container card-header text-center mt-5 ms-5">
+
+            @if (Model.Any())
+            {
+                <table class="table table-striped mt-5">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Description</th>
+                            <th>Announced Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var notification in Model)
+                        {
+                            <tr>
+                                <td>@notification.Id</td>
+                                <td>@notification.Notifications</td>
+                                <td>@notification.Date.ToString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-center text-capitalize">No notifications available</p>
+            }
+        </div>
+    </div>
+    <script src="~/js/toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿@* @model List<OrganizationWebsite.Models.AppUser>
+ *@
+ @model OrganizationWebsite.Models.AppUser
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Nav Example</title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            color: black;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                color: black;
+                padding: 15px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: #A0AECD;
+                    color: white;
+                }
+
+        header, footer {
+            display: none;
+        }
+
+        .btn-togg {
+            background-color: #A0AECD;
+            color: white;
+            height: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5 ">
+        <h4 class="text-center">
+            Profile <i class="bi bi-person"></i>
+        </h4>
+    </div>
+
+    <div class="container d-flex ">
+        <button class="btn btn-togg d-md-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+
+        <div style="border-radius:10px; display: flex; flex-direction: column; height: 75vh;" class="sidebar card-header mt-5 d-none d-md-flex" id="sidebar">
+            <h3 class="text-center"><i class="bi bi-list"></i> Menu</h3>
+            <a class="mt-5" asp-action="Index" asp-controller="DashBoard"><i class="bi bi-house-door"></i> Home</a>
+            <a asp-action="Profile" asp-controller="DashBoard"> <i class="bi bi-person"></i> Profile</a>
+            <a asp-action="Notifications" asp-controller="DashBoard"><i class="bi bi-bell"></i> Notifications</a>
+            <a asp-action="MyCourses" asp-controller="DashBoard"><i class="bi bi-book"></i> My Courses</a>
+            <a asp-action="ChangePassword" asp-controller="DashBoard"><i class="bi bi-gear"></i> Change Password</a>
+            <a asp-action="Logout" asp-controller="Account" class="mt-auto mb-1 "><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+
+        <div style="border-radius:10px;" class="container card-header text-center mt-5 ms-5 table-responsive">
+            @if (Model != null)
+            {
+                <dl class="row mt-5">
+                    <dt class="col-sm-3">Full Name</dt>
+                    <dd class="col-sm-9">@Model.FirstName @Model.LastName</dd>
+                    <hr />
+
+                    <dt class="col-sm-3">Gender</dt>
+                    <dd class="col-sm-9">@Model.Gender</dd>
+                    <hr />
+                    <dt class="col-sm-3">DOB</dt>
+                    <dd class="col-sm-9">@Model.DateOfBirth.ToString("yyyy")</dd>
+                    <hr />
+                    <dt class="col-sm-3">Email</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+                    <hr />
+                    <dt class="col-sm-3">Phone</dt>
+                    <dd class="col-sm-9">@Model.PhoneNumber</dd>
+                    <hr />
+                    <dt class="col-sm-3">Country</dt>
+                    <dd class="col-sm-9">@Model.Country</dd>
+                    <hr />
+                    <dt class="col-sm-3">State</dt>
+                    <dd class="col-sm-9">@Model.State</dd>
+                    <hr />
+                    <dt class="col-sm-3">City</dt>
+                    <dd class="col-sm-9">@Model.City</dd>
+                    <hr />
+@*                     <dt class="col-sm-3">Hobbies</dt>
+                    <dd class="col-sm-9">@Model.Hobbies</dd>
+                    <hr />
+                    <dt class="col-sm-3">Avatar</dt>
+                    <dd class="col-sm-9">
+                        <img src="@Url.Content(Model.Avatar)" alt="user avatar" class="img-fluid" />
+                    </dd>
+                    <hr />
+ *@                    <dd>
+                        <div class="text-center">
+                            <a href="Edit/@Model.Id" class="btn btn-outline-success"><i class="bi bi-pencil"></i> Edit</a>
+                        </div>
+                    </dd>
+                </dl>
+            }
+        </div>
+    </div>
+    <script src="~/js/toggle.js"></script>
+</body>
+</html>

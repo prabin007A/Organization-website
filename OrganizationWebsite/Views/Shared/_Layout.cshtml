@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OrganizationWebsite</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/OrganizationWebsite.styles.css" asp-append-version="true" />
+    <link href="~/images/scope-india-logo-bird.png"  rel="icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@700&family=Croissant+One&family=Dancing+Script&family=Lobster&family=Pacifico&family=Playwrite+BE+WAL:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+</style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent  box-shadow mb-3">
+            <div class="container-fluid">
+                <a id="scope" class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Home">Scope India...</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item nav-item-spacing">
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Home"><i class="bi bi-house"></i>Home</a>
+                        </li>
+                        <li class="nav-item nav-item-spacing">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs"><i class="bi bi-file-person"></i> About</a>
+                        </li>
+                        <li class="nav-item nav-item-spacing">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact"><i class="bi bi-person-lines-fill"></i> Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item item-spacing">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Home"><img id="logo" src="~/images/scope-india-logo-bird.png" /></a>
+                        </li>
+                    </ul>
+
+                    <partial name="_LoginPartial">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+@*     <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - OrganizationWebsite - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+ *@
+    <footer class="border-top footer mb-3 box-shadow text-muted">
+        <div class="container">
+            <!-- Social Icons -->
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <a href="#" class="mx-2" style="color: black;"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="mx-2" style="color: black;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="mx-2" style="color: black;"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="mx-2" style="color: black;"><i class="fa-brands fa-google-plus"></i></a>
+                    <a href="#" class="mx-2" style="color: black;"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- Navigation Links -->
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Our Team</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+        <div class="text-center mt-3">
+            <p>Copyright &copy; 2024; Designed by <span class="designer">Prabin</span></p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

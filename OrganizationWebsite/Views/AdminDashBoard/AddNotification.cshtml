@@ -1,0 +1,69 @@
+﻿@model OrganizationWebsite.ViewModels.NotificationVm
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>
+        @{
+            ViewData["Title"] = "Add notification";
+        }
+        </title>
+        <style>
+            header,footer{
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+    <a class="nav nav-link text-black mt-5 " asp-action="Index" asp-controller="AdminDashBoard"><i class="bi bi-arrow-left"></i> Back to home </a>
+
+    @{
+        var success = TempData["SuccessMessage"] as string;
+    }
+    @if (!string.IsNullOrEmpty(success))
+    {
+        <div class="alert alert-success" role="alert">
+            @success
+        </div>
+    }
+
+
+    <div class="container d-flex justify-content-center align-items-center mt-lg-5">
+
+        <form class="w-50" asp-action="AddNotification" asp-controller="AdminDashBoard" method="post">
+            <h1 class="text-center text-secondary">Add Notifications <i class="fas fa-bell"></i></h1>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Notification" class="label-control">Enter Notification</label>
+                        <i class="fas fa-bell"></i>
+                        <input type="text" asp-for="Notification" class="form-control" autofocus />
+                        <span asp-validation-for="Notification" class="text-danger fw-light"></span>
+                    </div>
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Date" class="label-control">Date</label>
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" asp-for="Date" class="form-control" />
+                        <span asp-validation-for="Date" class="text-danger fw-light"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="mt-5 btn btn-success">
+                    Add <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    @section Scripts{
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    </body>
+    </html>

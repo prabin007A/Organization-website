@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+        .nav-spacing {
+            margin-right: 20px;
+        }
+
+
+    </style>
+
+</head>
+    <body>
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var user = await UserManager.GetUserAsync(User);
+            var isadmin = await UserManager.IsInRoleAsync(user!, "Admin");
+
+            if (isadmin)
+            {
+                <li class="nav-item nav-spacing">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminDashBoard" asp-action="Index">Admin Dash Board <i class="bi bi-mortarboard"></i> </a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item nav-spacing">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="DashBoard" asp-action="Index">Student Dash Board <i class="bi bi-mortarboard"></i> </a>
+                </li>
+
+            }
+        }
+        else
+        {
+            <li class="nav-item nav-spacing">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register <i class="bi bi-person-plus-fill"></i> </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="btn" asp-area="" asp-controller="Account" asp-action="Login">Login <i class="bi bi-box-arrow-in-right"></i></a>
+            </li>
+        }
+
+    </ul>
+</body>
+    </html>
